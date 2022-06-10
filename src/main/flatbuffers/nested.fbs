@@ -1,0 +1,33 @@
+namespace com.example.flatbuffers;
+
+table FBRoot {
+  field1:string;
+  field2:string;
+  field3:string;
+  nested1:FBNested;
+  nested2:FBNested;
+  nested3:FBNested;
+}
+
+table FBNested {
+  field1:string;
+  field2:string;
+  field3:string;
+  inner1:FBInner;
+  inner2:FBInner;
+}
+
+table FBInner {
+  field1:string;
+  field2:string;
+  field3:string;
+  deep1:FBDeep;
+  deep2:FBDeep;
+}
+
+table FBDeep {
+  field1:string;
+  field2:string;
+}
+
+root_type FBRoot;

@@ -1,0 +1,40 @@
+namespace com.example.flatbuffers;
+
+enum FBRequestType:byte { BUY = 0, SELL, UNKNOWN = 2, TBD }
+
+enum FBStatus:byte {
+  NEW,
+  PENDING ,
+  ACKED,
+  NACKED ,
+  ERROR,
+  MATCHED ,
+  EXECUTED
+}
+
+table FBRequest {
+  id:int64;
+  name:string;
+  code:string;
+  account:string;
+  broker_account:string;
+  country:string;
+  request_type:FBRequestType;
+  quantity:int32;
+  price:float;
+  is_processed:bool;
+  date:string;
+  old_id: uint64;
+  client_name:string;
+  region:string;
+  status: FBStatus;
+  status_reason:string;
+  commission:double;
+  fee:double;
+  algorith: string;
+  instructins: string;
+}
+
+
+
+root_type FBRequest;

@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.18'
+        classpath 'gradle.plugin.com.github.gregwhitaker:gradle-flatbuffers-plugin:1.0.0'
+    }
+}
+
+import io.netifi.flatbuffers.plugin.tasks.FlatBuffers
+
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.8.18'
+    id "io.netifi.flatbuffers" version "1.0.7"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/java'
+            srcDirs 'build/generated/source/flatbuffers/main/java'
+        }
+    }
+}
+
+flatbuffers {
+    language = 'java'
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.20.1"
+    }
+}
+
+task createFlatBuffers(type: FlatBuffers) {
+    inputDir = file("src/main/flatbuffers")
+    outputDir = file("build/generated/source/flatbuffers/main/java")
+    language = 'java'
+//    extraArgs = '--gen-mutable --gen-object-api'
+}
+
+compileJava.dependsOn createFlatBuffers
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest({
+        attributes('Main-Class': 'Tester')
+    })
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    implementation 'com.google.protobuf:protobuf-java:3.21.1'
+    implementation 'com.google.flatbuffers:flatbuffers-java:2.0.3'
+
+    testImplementation 'junit:junit:+'
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.example";
+
+message ProtoRequest {
+  int64 id = 1;
+  string name = 2;
+  string code = 3;
+  string account = 4;
+  string brokerAccount = 5;
+  string country = 6;
+  ProtoRequestType requestType = 7;
+  sint32 quantity = 10;
+  float price = 8;
+  bool isProcessed = 9;
+  string date = 11;
+  uint64 oldId = 12;
+  string clientName = 13;
+  string region = 14;
+  ProtoStatus status = 15;
+  string statusReason = 16;
+  double commission = 17;
+  double fee = 18;
+  string algorithm = 19;
+  string instructions = 20;
+}
+
+enum ProtoRequestType {
+  BUY = 0;
+  SELL = 1;
+  UNKNOWN = 3;
+  TDB = 4;
+}
+
+enum ProtoStatus {
+  NEW = 0;
+  PENDING = 1;
+  ACKED = 2;
+  NACKED = 3;
+  ERROR = 4;
+  MATCHED = 5;
+  EXECUTED = 6;
+}
+
+
+

@@ -1,0 +1,36 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.example";
+
+message ProtoRoot {
+  string field1 = 1;
+  string field2 = 2;
+  string field3 = 3;
+  ProtoNested nested1 = 4;
+  ProtoNested nested2 = 5;
+  ProtoNested nested3 = 6;
+}
+
+message ProtoNested {
+  string field1 = 1;
+  string field2 = 2;
+  string field3 = 3;
+  ProtoInner inner1 = 4;
+  ProtoInner inner2 = 5;
+}
+
+message ProtoInner {
+  string field1 = 1;
+  string field2 = 2;
+  string field3 = 3;
+  ProtoDeep deep1 = 4;
+  ProtoDeep deep2 = 5;
+}
+
+message ProtoDeep {
+  string field1 = 1;
+  string field2 = 2;
+}
+
+
+

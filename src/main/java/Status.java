@@ -1,0 +1,3 @@
+public enum Status {
+    NEW, PENDING, ACKED, NACKED, ERROR, MATCHED, EXECUTED
+}
